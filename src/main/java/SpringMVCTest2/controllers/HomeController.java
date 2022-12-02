@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -17,6 +19,8 @@ public class HomeController {
     bookRepository bookrepository;
 
     private static AtomicInteger count = new AtomicInteger();
+
+
 
 
     @GetMapping("/{id}")
@@ -31,7 +35,13 @@ public class HomeController {
     }
 
     @GetMapping("/books")
-    public book greetIndex(@RequestParam(value = "name", defaultValue = "Default name") String name,@RequestParam(value = "author", defaultValue = "Default author") String author ){
+    public List<book> allBooks(){
+        List<book> foundBooks = (List<book>) bookrepository.findAll();
+        return foundBooks;
+    }
+
+    @GetMapping("/addbook")
+    public book addBook(@RequestParam(value = "name", defaultValue = "Default name") String name,@RequestParam(value = "author", defaultValue = "Default author") String author ){
         book paramBook = new book(count.incrementAndGet(), name, author);
         bookrepository.save(paramBook);
         return paramBook;
