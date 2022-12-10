@@ -24,6 +24,7 @@ public class addController {
         return "add";
     }
 
+    // test
     @PostMapping("/add")
     public String processAddBook(@ModelAttribute @Valid book newBook, Model model){
         List<book> foundBooks = (List<book>) bookrepository.findAll();
