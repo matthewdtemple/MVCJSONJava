@@ -24,7 +24,7 @@ public class addController {
         return "add";
     }
 
-    // test
+    // Takes the user's entered text and creates a new book, storing it in MySQL
     @PostMapping("/add")
     public String processAddBook(@ModelAttribute @Valid book newBook, Model model){
         List<book> foundBooks = (List<book>) bookrepository.findAll();

@@ -34,12 +34,14 @@ public class HomeController {
         return bookGet;
     }
 
+    // returns a json element list of every book found in MySQL.
     @GetMapping("/books")
     public List<book> allBooks(){
         List<book> foundBooks = (List<book>) bookrepository.findAll();
         return foundBooks;
     }
 
+    // Example: ?name=Ants would make a new book with the title "Ants." If there isn't a ?name=, "Default name" is given to the new book.
     @GetMapping("/addbook")
     public book addBook(@RequestParam(value = "name", defaultValue = "Default name") String name,@RequestParam(value = "author", defaultValue = "Default author") String author ){
         book paramBook = new book(count.incrementAndGet(), name, author);
